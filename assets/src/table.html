@@ -1,14 +1,29 @@
 
-<h5>Select columns to show.</h5>
-<form>
-<input type="checkbox" onchange="toggleHiddenColumn('alpha_code')"/>Alpha code<br />
-<input type="checkbox" onchange="toggleHiddenColumn('order')"/>Order<br />
-<input type="checkbox" onchange="toggleHiddenColumn('family')"/>Family<br />
-<input type="checkbox" onchange="toggleHiddenColumn('genus')"/>Genus<br />
-<input type="checkbox" onchange="toggleHiddenColumn('bioacoustic_category')"/>Bioacoustic category<br />
-<input type="checkbox" onchange="toggleHiddenColumn('high_or_low')"/>High or low<br />
-</form>
-<h5>Click on a row to display more examples.</h5>
+<h5>Select columns to display</h5>
+<div class="btn-group btn-group-toggle" data-toggle="buttons">
+    <label class="btn btn-primary active" id="species_button">
+        <input type="checkbox" name="options" autocomplete="off" checked onchange="toggleHiddenColumn('species', 'species_button')"> Species
+    </label>
+    <label class="btn btn-primary" id="alpha_code_button">
+        <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('alpha_code', 'alpha_code_button')"> Alpha code
+    </label>
+    <label class="btn btn-primary" id="order_button">
+        <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('order', 'order_button')"> Order
+    </label>
+    <label class="btn btn-primary" id="family_button">
+        <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('family', 'family_button')"> Family
+    </label>
+    <label class="btn btn-primary" id="bioacoustic_category_button">
+        <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('bioacoustic_category', 'bioacoustic_category_button')"> Bioacoustic category
+    </label>
+    <label class="btn btn-primary" id="high_or_low_button">
+        <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('high_or_low', 'high_or_low_button')"> Frequency range
+    </label>
+    <label class="btn btn-primary active" id="spectrograms_button">
+        <input type="checkbox" name="options" autocomplete="off" checked onchange="toggleHiddenColumn('spectrograms', 'spectrograms_button')"> Spectrograms
+    </label>
+</div><br><br>
+<h5>Click on a row to display more spectrogram examples</h5>
 <table>
   <thead>
       <tr>
@@ -16,9 +31,8 @@
         <th class="alpha_code" style="display:none;">Alpha code</th>
         <th class="order" style="display:none;">Order</th>
         <th class="family" style="display:none;">Family</th>
-        <th class="genus" style="display:none;">Genus</th>
         <th class="bioacoustic_category" style="display:none;">Bioacoustic category</th>
-        <th class="high_or_low" style="display:none;">High or low</th>
+        <th class="high_or_low" style="display:none;">Frequency range</th>
         <th class="spectrograms" width="60%">Spectrograms</th>
       </tr>
   </thead>
@@ -28,7 +42,6 @@
         <td class=alpha_code style="display:none;">coye</td>
         <td class=order style="display:none;">passeriformes</td>
         <td class=family style="display:none;">parulidae</td>
-        <td class=genus style="display:none;">geothlypis</td>
         <td class=bioacoustic_category style="display:none;">nan</td>
         <td class=high_or_low style="display:none;">high</td>
         <td class="spectrograms">
@@ -40,7 +53,6 @@
         <td class=alpha_code style="display:none;">amre</td>
         <td class=order style="display:none;">passeriformes</td>
         <td class=family style="display:none;">parulidae</td>
-        <td class=genus style="display:none;">setophaga</td>
         <td class=bioacoustic_category style="display:none;">nan</td>
         <td class=high_or_low style="display:none;">high</td>
         <td class="spectrograms">
@@ -52,7 +64,6 @@
         <td class=alpha_code style="display:none;">mawa</td>
         <td class=order style="display:none;">passeriformes</td>
         <td class=family style="display:none;">parulidae</td>
-        <td class=genus style="display:none;">setophaga</td>
         <td class=bioacoustic_category style="display:none;">zeep</td>
         <td class=high_or_low style="display:none;">high</td>
         <td class="spectrograms">
@@ -64,7 +75,6 @@
         <td class=alpha_code style="display:none;">swth</td>
         <td class=order style="display:none;">passeriformes</td>
         <td class=family style="display:none;">turdidae</td>
-        <td class=genus style="display:none;">catharus</td>
         <td class=bioacoustic_category style="display:none;">nan</td>
         <td class=high_or_low style="display:none;">low</td>
         <td class="spectrograms">
@@ -76,7 +86,6 @@
         <td class=alpha_code style="display:none;">savs</td>
         <td class=order style="display:none;">passeriformes</td>
         <td class=family style="display:none;">passerellidae</td>
-        <td class=genus style="display:none;">passerculus</td>
         <td class=bioacoustic_category style="display:none;">double downsweep</td>
         <td class=high_or_low style="display:none;">high</td>
         <td class="spectrograms">

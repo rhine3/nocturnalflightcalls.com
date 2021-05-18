@@ -5,25 +5,35 @@ hidden_tds = {
     'alpha_code':"Alpha code",
     'order':"Order",
     'family':"Family",
-    'genus':"Genus",
+#    'genus':"Genus",
     'bioacoustic_category':"Bioacoustic category",
-    'high_or_low':"High or low"
+    'high_or_low':"Frequency range"
 }
 
-# Selectors for the hidden columns
+
+# Allow users to toggle columns on/off
 start_str = """
-<h5>Select columns to show.</h5>
-<form>"""
+<h5>Select columns to display</h5>
+<div class="btn-group btn-group-toggle" data-toggle="buttons">
+    <label class="btn btn-primary active" id="species_button">
+        <input type="checkbox" name="options" autocomplete="off" checked onchange="toggleHiddenColumn('species', 'species_button')"> Species
+    </label>"""
+# Selectors for the hidden columns
 for col_class, col_title in hidden_tds.items():
     start_str += f"""
-<input type="checkbox" onchange="toggleHiddenColumn('{col_class}')"/>{col_title}<br />"""
+    <label class="btn btn-primary" id="{col_class}_button">
+        <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('{col_class}', '{col_class}_button')"> {col_title}
+    </label>"""
 start_str += """
-</form>"""
+    <label class="btn btn-primary active" id="spectrograms_button">
+        <input type="checkbox" name="options" autocomplete="off" checked onchange="toggleHiddenColumn('spectrograms', 'spectrograms_button')"> Spectrograms
+    </label>
+</div><br><br>"""
 
 
 # Header of the table with hidden columns hidden by default
 start_str +="""
-<h5>Click on a row to display more examples.</h5>
+<h5>Click on a row to display more spectrogram examples</h5>
 <table>
   <thead>
       <tr>

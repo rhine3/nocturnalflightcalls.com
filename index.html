@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
 
@@ -39,8 +44,8 @@
       );
     };
 
-    function toggleHiddenColumn(col) {
-           $("." + col).toggle();
+    function toggleHiddenColumn(col, btnid) {
+      $("." + col).toggle();
      };
 
      function toggleHiddenImage(im) {
@@ -78,32 +83,19 @@ td, th {
   }--->
 <h2> Nocturnal Flight Calls </h2>
 
-<p id="demo"></p>
-
 <h5>Filter by keywords</h5>
-<br>
-<div class="col-lg-5">
-   <div class="input-group">
-     <select multiple data-role="tagsinput" id="filterInput" name="filterInput" placeholder="Press Enter to add">
-     </select>
-     </select>
-     <span class='input-group-btn'>
-     <button type='button' class='btn btn-primary' onclick="filterTable()">
-         Go!
-     </button>
-     </span>
-   </div>
+<div class="input-group">
+  <select multiple data-role="tagsinput" id="filterInput" name="filterInput" placeholder="Press Enter to add">
+  </select>
+  </select>
+  <span class='input-group-btn'>
+    <button type='button' class='btn btn-primary' onclick="filterTable()">
+      Go!
+    </button>
+  </span>
 </div>
-
-<br><br>
-<form>
-    <input type="checkbox" name="code_check" onchange="toggleHiddenColumn('alpha_code')"/> Alpha code <br />
-</form>
-
-<br><br>
+<br>
 
 <div id="includedTable"></div>
-
-<p id="test"></p>
 
 </html>
