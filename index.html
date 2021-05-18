@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+
+  <meta name="robots" content="index, follow" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="library/bootstrap-tagsinput.css">
+  <link rel="stylesheet" href="library/app.css">
+
+
+  <script>
+
+    // to include an external table
+    $(function(){
+      $("#includedTable").load("assets/src/table.html");
+    });
+
+    //Little random testing piece
+    ///$("#test").html('yeah im workin');
+
+    function filterTable() {
+      // Get all the user-defined filters
+      var filters = $("#filterInput").val();
+
+      $("#nfcTable tr").filter( // for all <tr>s in nfcTable:
+        function(){
+          // Only show the trs of interest
+          var reg = new RegExp(filters.join('|'), "i")
+          if (reg.test($(this).text())){
+            $(this).show()
+          } else {
+            $(this).hide()
+          }
+        }
+      );
+    };
+
+    function toggleHiddenColumn(col) {
+           $("." + col).toggle();
+     };
+
+     function toggleHiddenImage(im) {
+            $("." + im).toggle();
+      };
+    </script>
+<style>
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.species_row:hover{
+  background-color:#eeeeee;
+}
+#table_detail .hidden_row {
+  display: none;
+}
+</style>
+</head>
+
+<body>
+
+  <!-- tr:nth-child(even) {
+    background-color: #dddddd;
+  }--->
+<h2> Nocturnal Flight Calls </h2>
+
+<p id="demo"></p>
+
+<h5>Filter by keywords</h5>
+<br>
+<div class="col-lg-5">
+   <div class="input-group">
+     <select multiple data-role="tagsinput" id="filterInput" name="filterInput" placeholder="Press Enter to add">
+     </select>
+     </select>
+     <span class='input-group-btn'>
+     <button type='button' class='btn btn-primary' onclick="filterTable()">
+         Go!
+     </button>
+     </span>
+   </div>
+</div>
+
+<br><br>
+<form>
+    <input type="checkbox" name="code_check" onchange="toggleHiddenColumn('alpha_code')"/> Alpha code <br />
+</form>
+
+<br><br>
+
+<div id="includedTable"></div>
+
+<p id="test"></p>
+
+</html>
