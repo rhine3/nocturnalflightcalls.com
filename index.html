@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 
 
@@ -21,81 +21,152 @@
 
     // to include an external table
     $(function(){
-      $("#includedTable").load("assets/src/table.html");
-    });
+          $("#includedTable").load("assets/src/table.html");
+    }); 
 
-    //Little random testing piece
-    ///$("#test").html('yeah im workin');
+    $(document).ready(function() {
 
-    function filterTable() {
-      // Get all the user-defined filters
-      var filters = $("#filterInput").val();
+      // Show and hide info at the top of the page when the info link is clicked
+      $('#toggleInfoLink').click(function() {
+        $('#toggleDiv').toggle();
+        $('#toggleInfoLink').text(
+          ($("#toggleInfoLink").text() === "Show more info...") ? "Show less info" : "Show more info..."
+        );
+      });
 
-      $("#nfcTable tr").filter( // for all <tr>s in nfcTable:
-        function(){
-          // Only show the trs of interest
-          var reg = new RegExp(filters.join('|'), "i")
-          if (reg.test($(this).text())){
-            $(this).show()
-          } else {
-            $(this).hide()
+      // Toggle the height of the spectrogram div in a species row when it is clicked
+      // Need to use delegated method (.on instead of .click) because external table is loaded
+      $('#includedTable').on("click", ".species_row", function() {
+        $(this).find('.spectrogramContainer').css("height",
+          ($(this).find('.spectrogramContainer').css("height") === "100px") ? "auto" : "100px"
+        )
+      });
+
+      // Filter the table when the "Filter" button is pressed
+      $('#filterButton').click(function() {
+        var filters = $("#filterInput").val(); // Get all the user-defined filters
+        $("#nfcTable tr").filter( // for all <tr>s in nfcTable:
+          function(){
+            // Only show the trs of interest
+            var reg = new RegExp(filters.join('|'), "i")
+            if (reg.test($(this).text())){
+              $(this).show()
+            } else {
+              $(this).hide()
+            }
           }
-        }
-      );
-    };
+        );
+      })
 
+      // Remove filter tags and show all columns when the "Clear filters" button is pressed
+      $('#clearFiltersButton').click(function() {
+        $("#nfcTable tr").show();
+        // Remove the user-inserted filters
+        $('#filterInput').tagsinput('removeAll');
+      })
+    })
+
+    // Toggle hidden column when the button is pressed
+    // Keeping onclick approach for this because specifying arguments in butons is helpful
     function toggleHiddenColumn(col, btnid) {
       $("." + col).toggle();
      };
 
-     function toggleHiddenImage(im) {
-            $("." + im).toggle();
-      };
+    
     </script>
 <style>
 
+/* Basic appearance formatting */
+body {
+  padding: 5% 10%;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+  word-wrap: break-word;
+}
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
   table-layout: fixed;
+  margin-top:10px;
 }
-
 td, th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
 }
 
+/* The informational text is off to start */
+#toggleDiv {
+  display: none;
+}
+
+/* Use a different color when hovering over rows with cursor*/ 
 .species_row:hover{
   background-color:#eeeeee;
 }
-#table_detail .hidden_row {
-  display: none;
+
+/* Set spectrogram container to only be large enough for one row to start*/ 
+.spectrogramContainer {
+  height: 100px;
+  overflow: hidden;
 }
+
+#filterInput:placeholder {
+  overflow: visible !important;
+}
+
 </style>
 </head>
 
 <body>
 
-  <!-- tr:nth-child(even) {
-    background-color: #dddddd;
-  }--->
-<h2> Nocturnal Flight Calls </h2>
+<div>
+  <div>
+    <h2> Nocturnal Bird Flight Calls of North America </h2>
+      <p>Welcome! This website is a quick reference for the nocturnal flight calls of the birds of North America.</p>
+      <p>Click on a row to display more spectrogram examples. Spectrograms are displayed with labels in milliseconds (horizontal axis) and kilohertz (vertical axis).</p>
+      <p><a id="toggleInfoLink">Show more info...</a></p>
+  </div>
+  <div id="toggleDiv">
+    <h4>How to use this website</h4>
+    <p>By default, the website displays the common name, scientific name, and a handful of example spectrograms for every species in our dataset. Display more information about species using the "select columns to display" option. </p>
 
-<h5>Filter by keywords</h5>
-<div class="input-group">
-  <select multiple data-role="tagsinput" id="filterInput" name="filterInput" placeholder="Press Enter to add">
-  </select>
-  </select>
-  <span class='input-group-btn'>
-    <button type='button' class='btn btn-primary' onclick="filterTable()">
-      Go!
-    </button>
-  </span>
+    <p>To limit which species are displayed, use the keyword filtering functionality. You may filter by any information available in the columns (e.g. common name, scientific name, order, alpha code). Make sure to hit "return" between each keyword. Species matching any keyword will be displayed.</p>
+
+    <p>All recordings used to generate the spectrograms on this website are available for download by clicking on the spectrogram.</p>
+
+    <h4>Contributors and attribution</h4>
+    <p>This website is a collaboration between the <a href="https://johnfkearney.com/listening-together-project-projet-ecouter-ensemble/">Listening Together Project</a>, the <a href="http://kitzeslab.org">Kitzes Lab</a> at the University of Pittsburgh, and the <a href="https://discovery.acadiau.ca/acwern/home.html">Phil Taylor Lab</a> at Arcadia University.</p>
+
+    <p>Our initial dataset of flight calls were collected through a series of nocturnal monitoring stations in eastern Canada and identified by John Kearney of the Listening Together Project.</p>
+
+    <p>If you use this website or its media in a project, please provide link to it.</p>
+
+    <h4>Contributions welcome</h4>
+    <p>This website is missing flight calls for many common species throughout North America. If you are interested in contributing identified recordings, please contact Tessa Rhinehart (<code>tessa dot rhinehart at pitt dot edu</code>).</p>
+  </div>
+
+  <label class="control-label">Filter species:</label>
+    <div class="input-group" style="padding-bottom:10px;">
+      <select multiple data-role="tagsinput" id="filterInput" name="filterInput" placeholder="Press Enter to add filter" >
+      </select> 
+      <div class='input-group-btn'>
+        <button type='button' class='btn btn-success' id="filterButton">
+          Filter
+        </button>
+        <button type='button' class='btn btn-primary' id="clearFiltersButton">
+          Clear filters
+        </button>
+      </div>
+    </div>
+
+  </div>
+
 </div>
-<br>
 
 <div id="includedTable"></div>
 
+</body>
 </html>
