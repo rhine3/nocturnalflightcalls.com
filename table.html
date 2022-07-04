@@ -1,41 +1,41 @@
 
-<label class="control-label">Display columns:</label>
-<div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-left: 10px;">
-    <label class="btn btn-primary active" id="species_button">
-        <input type="checkbox" name="options" autocomplete="off" checked onchange="toggleHiddenColumn('species', 'species_button')"> Species
-    </label>
-    <label class="btn btn-primary" id="alpha_code_button">
-        <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('alpha_code', 'alpha_code_button')"> Code
-    </label>
-    <label class="btn btn-primary" id="order_button">
-        <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('order', 'order_button')"> Order
-    </label>
-    <label class="btn btn-primary" id="family_button">
-        <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('family', 'family_button')"> Family
-    </label>
-    <label class="btn btn-primary" id="bioacoustic_category_button">
-        <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('bioacoustic_category', 'bioacoustic_category_button')"> Category
-    </label>
-    <label class="btn btn-primary" id="high_or_low_button">
-        <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('high_or_low', 'high_or_low_button')"> Frequency
-    </label>
-    <label class="btn btn-primary active" id="spectrograms_button">
-        <input type="checkbox" name="options" autocomplete="off" checked onchange="toggleHiddenColumn('spectrograms', 'spectrograms_button')"> Spectrograms
-    </label>
-</div>
-<table>
-  <thead>
-      <tr>
-        <th class="species">Species</th>
-        <th class="alpha_code" style="display:none;">Code</th>
-        <th class="order" style="display:none;">Order</th>
-        <th class="family" style="display:none;">Family</th>
-        <th class="bioacoustic_category" style="display:none;">Category</th>
-        <th class="high_or_low" style="display:none;">Frequency</th>
-        <th class="spectrograms" width="60%">Spectrograms</th>
-      </tr>
-  </thead>
-  <tbody id="nfcTable">
+    <label class="control-label">Display columns:</label>
+    <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-left: 10px;">
+        <label class="btn btn-primary active" id="species_button">
+            <input type="checkbox" name="options" autocomplete="off" checked onchange="toggleHiddenColumn('species', 'species_button')"> Species
+        </label>
+        <label class="btn btn-primary" id="alpha_code_button">
+            <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('alpha_code', 'alpha_code_button')"> Code
+        </label>
+        <label class="btn btn-primary" id="order_button">
+            <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('order', 'order_button')"> Order
+        </label>
+        <label class="btn btn-primary" id="family_button">
+            <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('family', 'family_button')"> Family
+        </label>
+        <label class="btn btn-primary" id="bioacoustic_category_button">
+            <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('bioacoustic_category', 'bioacoustic_category_button')"> Category
+        </label>
+        <label class="btn btn-primary" id="high_or_low_button">
+            <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('high_or_low', 'high_or_low_button')"> Frequency
+        </label>
+        <label class="btn btn-primary active" id="spectrograms_button">
+            <input type="checkbox" name="options" autocomplete="off" checked onchange="toggleHiddenColumn('spectrograms', 'spectrograms_button')"> Spectrograms
+        </label>
+    </div>
+    <table>
+      <thead>
+          <tr>
+            <th class="species">Species</th>
+            <th class="alpha_code" style="display:none;">Code</th>
+            <th class="order" style="display:none;">Order</th>
+            <th class="family" style="display:none;">Family</th>
+            <th class="bioacoustic_category" style="display:none;">Category</th>
+            <th class="high_or_low" style="display:none;">Frequency</th>
+            <th class="spectrograms" width="60%">Spectrograms</th>
+          </tr>
+      </thead>
+      <tbody id="nfcTable">
     <tr class="species_row">
         <td class="species">Canada Goose (<i>Branta canadensis</i>)</td>
         <td class="alpha_code" style="display:none;">CANG</td>
