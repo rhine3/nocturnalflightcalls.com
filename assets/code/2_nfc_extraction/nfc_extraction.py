@@ -226,6 +226,8 @@ for idx, row in sampled_calls.reset_index(drop=True).iterrows():
     
     # Create the filename containing the info about the call
     bp_low, bp_high, approx_duration = freq_limits.query("code == @alpha")[['low_freq', 'high_freq', 'approx_duration']].values[0]
+    if bp_low == 0:
+        bp_low = 0.1
     file_info = [order, family, genus, species, alpha, str(begin), str(end)]
     dirname = media_path.joinpath(alpha)
     dirname.mkdir(exist_ok=True)
