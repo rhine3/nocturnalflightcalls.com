@@ -42,7 +42,8 @@ def sec_reformatter(tick_val_sec, pos):
     val_ms = tick_val_sec*1000
     return "%.0f" % val_ms
 
-def save_or_plot_spectrogram(s, filename, duration, save=True):
+plt.rcParams['figure.dpi'] = 300
+def save_or_plot_spectrogram(s, filename, duration, save=True, pixels_tall=150):
     """Create and save an NFC spectrogram
     
     Inputs:
@@ -51,20 +52,27 @@ def save_or_plot_spectrogram(s, filename, duration, save=True):
         duration: duration of the spectrogram
         save: whether or not to save the file. If not saved, just plots the fig
     """
-    plt.subplots(figsize=(duration*30, 5))
+    px = 1/plt.rcParams['figure.dpi']  # pixel in inches
+    plt.subplots(figsize=(duration*pixels_tall*5*px, pixels_tall*px))
+    # plt.subplots(figsize=(duration*30, 5))
+    
     plot = s.plot(inline=False)
     s.plot(inline=False)
     ax = plt.gca()
     ax.set_ylabel("")
     ax.set_xlabel("")
-    ax.tick_params(axis="y", direction="in", pad=-25, length=5, labelsize=17)
-    ax.tick_params(axis="x", direction="in", pad=-20, length=5, labelsize=17)
+    ax.tick_params(axis="y", direction="in", pad=-4, length=1.3, width=0.2, labelsize=2)
+    ax.tick_params(axis="x", direction="in", pad=-3, length=1.3, width=0.2, labelsize=2)
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
     ax.margins(x=0)
     
     ax.set_xticks(np.arange(0, duration, 0.05)[1:])
     ax.set_yticks([2000, 4000, 6000, 8000, 10000])
+    
+    
+    for axis in ['top','bottom','left','right']:
+        ax.spines[axis].set_linewidth(0.5)
     
     ax.xaxis.set_major_formatter(ticker.FuncFormatter(sec_reformatter))
     ax.yaxis.set_major_formatter(ticker.FuncFormatter(freq_reformatter))
@@ -249,16 +257,25 @@ for idx, row in sampled_calls.reset_index(drop=True).iterrows():
             buffer_length=buffer_long_recording_seconds,
             species_call_duration=approx_duration)
         long_segment = Audio.from_file(audio_file, offset=long_seg_start, duration=long_seg_dur)
+        
+        # Bandpass samples
+        if bandpass:
+            long_segment = long_segment.bandpass(bp_low, bp_high, order=bp_order)
+
+        # Normalize samples
+        neg_3_db = 0.7080078
+        multiplier = neg_3_db / max(abs(long_segment.samples))
+        long_segment.samples = long_segment.samples * multiplier
+
         if save_audio:
             audio_filename = str(audio_dirname.joinpath(filename)) + '.wav'
             long_segment.save(audio_filename)
-            
-            s = Spectrogram.from_audio(
+            """s = Spectrogram.from_audio(
                 long_segment, window_samples=window_samples, overlap_samples=overlap_samples, decibel_limits=decibel_limits, window_type=window_type)
             spectrogram_dirname = dirname.joinpath('spectrograms')
             spectrogram_dirname.mkdir(exist_ok=True)
             spectrogram_filename = str(spectrogram_dirname.joinpath(filename)) + '.jpg'
-            save_or_plot_spectrogram(s, filename=str(spectrogram_filename), duration=long_seg_dur, save=save_spectrogram)
+            save_or_plot_spectrogram(s, filename=str(spectrogram_filename), duration=long_seg_dur, save=save_spectrogram)"""
 
 
     # Save some info about the file
@@ -281,7 +298,7 @@ for idx, row in sampled_calls.reset_index(drop=True).iterrows():
     spectrogram_filename = str(spectrogram_dirname.joinpath(filename)) + '_display.jpg'
     save_or_plot_spectrogram(s, filename=str(spectrogram_filename), duration=short_seg_dur, save=save_spectrogram)
 
-
+    
 # Save records of clips
 metadata_df = pd.DataFrame(metadata, columns=[
     'project', 'source_clip', 'order', 'family', 'genus', 'species', 'alpha_code',
