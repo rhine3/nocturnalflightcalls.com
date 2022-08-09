@@ -186,11 +186,20 @@ div>.active{
     background: #2c5e9c !important;
 }
 
+/* Background image and style for navbar */
+.navbar {
+  background-color: #000000;
+  background-image: url('header.png');
+  background-position: right;
+  background-repeat:no-repeat;
+  background-size:90px;
+}
+
 </style>
 </head>
 
 <body>
-<nav class="navbar navbar-expand-md navbar-dark" style="background-color: #626f7b;">
+<nav class="navbar navbar-expand-md navbar-dark">
   <a class="navbar-brand" href="index.html"><b>Nocturnal Flight Calls of North America</b></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -210,7 +219,7 @@ div>.active{
 <div id="maincontent">
   <div>
       <p>Welcome! This website acts as a quick guide to many of the nocturnal flight calls of birds of North America.</p> 
-      <span id="toggleInfoLink" class="badge badge-primary mb-3" style="background-color: #626f7b;">How to use...</span>
+      <span id="toggleInfoLink" class="badge badge-primary mb-3" style="background-color: #626f7b; cursor: pointer;">How to use...</span>
   </div>
 
   <div id="toggleDiv">

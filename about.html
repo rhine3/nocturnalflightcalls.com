@@ -42,11 +42,21 @@ body {
   hyphens: auto;
   word-wrap: break-word;
 }
+
+/* Background image and style for navbar */
+.navbar {
+  background-color: #000000;
+  background-image: url('header.png');
+  background-position: right;
+  background-repeat:no-repeat;
+  background-size:90px;
+}
+
 </style>
 </head>
 
 <body>
-<nav class="navbar navbar-expand-md navbar-dark" style="background-color: #626f7b;">
+<nav class="navbar navbar-expand-md navbar-dark">
     <a class="navbar-brand" href="index.html"><b>Nocturnal Flight Calls of North America</b></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -66,17 +76,21 @@ body {
   
 <div>
   <div>
-        <h4 class="mt-5">Contributors and attribution</h4>
+        <h5 class="mt-5">Contributors</h5>
             <p>This website is a collaboration between the <a href="https://johnfkearney.com/listening-together-project-projet-ecouter-ensemble/">Listening Together Project</a>, the <a href="http://kitzeslab.org">Kitzes Lab</a> at the University of Pittsburgh, and the <a href="https://discovery.acadiau.ca/acwern/home.html">Phil Taylor Lab</a> at Arcadia University.</p>
             <p>Our initial dataset of flight calls were collected through a series of nocturnal monitoring stations in eastern Canada and identified by John Kearney of the Listening Together Project.</p>
-            <p>If you use this website or its media in a project, please provide link to it.</p>
+            <p>This website's header image is a compilation of photos by Geoffrey Gilmour-Taylor (<a href="https://flickr.com/photos/giltay/13979264958">"Oriole in Flight"</a>, CC BY-NC-SA 2.0) and Catherine Singleton (<a href="https://flickr.com/photos/s1ng0/6303898890/">"Moon"</a>, CC BY-SA 2.0).</p>
         
-        <h4 class="mt-5">Contributions welcome</h4>
-        <p>This website is missing flight calls for many common species throughout North America. Listed below are the species for which Oldbird has a page, but for which we have fewer than 30 recordings.</p>
+        <h5 class="mt-5">Attribution</h5>
+            <p>If you use this website or its media in a project, please provide link to it.</p>
+
+        <h5 class="mt-5">Additional resources</h5>
+            <p>For a well-maintained document containing resources for those interested in nocturnal flight calls, see <a href="https://docs.google.com/document/d/1YaKaqGodIJnhLMBfQTJAxRnk9Cb4qoE4H1syjpL1Otg/edit">this list</a> by Joe Gyekis and Julia Plummer.</p>
+        
+        <h5 class="mt-5">Contributions welcome</h5>
+        <p>This website is missing flight calls for many common species throughout North America. Listed below are the species for which Oldbird has a page, but for which this website contains fewer than 30 clips.</p>
         <p>If you are interested in contributing identified recordings of these or other species, please contact Tessa Rhinehart (<a href="mailto:tessa.rhinehart@pitt.edu" target="_blank">tessa.rhinehart@pitt.edu</a>).</p>
-  
-        <h5 class="mt-5">Needed species:</h5>
-        <div id="neededSpeciesTable"></div>
+        <div id="neededSpeciesTable" class="ml-5 mr-5"></div>
     </div>
 </div>
 </body>
