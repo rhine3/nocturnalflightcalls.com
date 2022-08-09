@@ -4,16 +4,14 @@
 <title>Nocturnal Bird Flight Calls of North America</title>
 
   <!--Jquery-->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   
   <!--Bootstrap-->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   
-  <!--Fancybox-->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
-
   <!--Tagsinput-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
 
@@ -21,14 +19,20 @@
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
-  <link rel="stylesheet" href="library/bootstrap-tagsinput.css">
-  <link rel="stylesheet" href="library/app.css">
-  <link rel="stylesheet" href="library/fancybox.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="css/bootstrap-tagsinput.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/website.css">
+
   <script>
 
-    // to include an external table
+    // To include the external table of spectrograms
     $(function(){
-          $("#includedTable").load("table.html");
+      $("#includedTable").load(
+        "tables/spectrograms.html",
+        complete=function(response, status, request){
+          $('#loadingOverlay').css("visibility", "hidden");
+        }
+      );
     }); 
 
     $(document).ready(function() {
@@ -37,14 +41,14 @@
       $('#toggleInfoLink').click(function() {
         $('#toggleDiv').toggle();
         $('#toggleInfoLink').html(
-          ($("#toggleInfoLink").html() === "How to use...") ? "Show less information" : "How to use..."
+          ($("#toggleInfoLink").html() === "How to use this website...") ? "Show less information" : "How to use this website..."
         );
       });
 
       // Toggle the height of the spectrogram div in a species row when it is clicked
       // Need to use delegated method (.on instead of .click) because external table is loaded
       $('#includedTable').on("click", ".species_row", function(e) {
-        if (!$(e.target).is('img')) {
+        if (!($(e.target).is('img') | $(e.target).is('div'))) {
           $(this).find('.spectrogramContainer').css("height",
             ($(this).find('.spectrogramContainer').css("height") === "102px") ? "auto" : "102px"
           )
@@ -93,6 +97,14 @@
 
       parent.style.display = "block";
       thisAudio.play();
+
+      // Enable use of ESC to close overlay box
+      document.addEventListener('keyup', (e) => {
+        if (e.key === "Escape") {
+          overlayOff(parent);
+        }
+      });
+
     }
 
     // Close the audio overlay box
@@ -103,102 +115,38 @@
       activeOverlay.style.display = "none";
     }
 
-    $('.switch').click(()=>{
-      $([".light [class*='-light']", ".dark [class*='-dark']"]).each((i,ele)=>{
-          $(ele).toggleClass('bg-light bg-dark')
-          $(ele).toggleClass('text-light text-dark')
-          $(ele).toggleClass('navbar-light navbar-dark')
-      })
-      // toggle body class selector
-      $('body').toggleClass('light dark')
-    })
-
     </script>
+</head>
 <style>
 
-/* Basic appearance formatting */
-body {
-  padding: 1% 5%;
-  -webkit-hyphens: auto;
-  -ms-hyphens: auto;
-  hyphens: auto;
-  word-wrap: break-word;
-}
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-  table-layout: fixed;
-  margin-top: 10px;
-}
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 10px;
-  margin-inline: 10px;
+  #loadingOverlay{
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position:fixed;
+    z-index:9999;
+    background: rgba(255,255,255,0.7)
 }
 
-/* The informational text is off to start */
-#toggleDiv {
-  display: none;
-}
-
-/* Use a different color when hovering over rows with cursor*/ 
-.species_row:hover{
-  background-color:#eeeeee;
-}
-
-/* Set spectrogram container to only be large enough for one row to start*/ 
-.spectrogramContainer {
-  height: 102px;
-  overflow: hidden;
-}
-
-#filterInput:placeholder {
-  overflow: visible !important;
-}
-
-/* Styling for overlays */
-.overlay {
-  position: fixed;
-  display: none;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0,0,0,0.5);
-  z-index: 2;
-  cursor: pointer;
-}
-.audiobox{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  text-align: center;
-  transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-}
-
-/* Styling for active buttons */
-div>.active{
-    background: #2c5e9c !important;
-}
-
-/* Background image and style for navbar */
-.navbar {
-  background-color: #000000;
-  background-image: url('header.png');
-  background-position: right;
-  background-repeat:no-repeat;
-  background-size:90px;
-}
-
+  #overlaySpinner{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10rem;
+    height: 10rem;
+  }
 </style>
-</head>
 
 <body>
+<div id="loadingOverlay" class="text-center justify-content-center ">
+  <div class="spinner-border" id="overlaySpinner" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
 <nav class="navbar navbar-expand-md navbar-dark">
   <a class="navbar-brand" href="index.html"><b>Nocturnal Flight Calls of North America</b></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -212,14 +160,22 @@ div>.active{
       <li class="nav-item">
         <a class="nav-link ml-5" href="about.html">About</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link ml-5" href="credits.html">Credits</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link ml-5" href="contribute.html">Contribute</a>
+      </li>
     </ul>
   </div>
 </nav>
 
 <div id="maincontent">
   <div>
-      <p>Welcome! This website acts as a quick reference to many of the nocturnal flight calls of birds of North America.</p> 
-      <span id="toggleInfoLink" class="badge badge-primary mb-3" style="background-color: #626f7b; cursor: pointer;">How to use...</span>
+      <p>Welcome! This website acts as a quick reference to many of the nocturnal flight calls of birds of North America.</p>
+      <p>Calls displayed here were collected via remote acoustic recordings. As such, there is some degree of uncertainty in their identification. Read more about this process on the <a href="about.html">About</a> page.</p> 
+      <p></p>
+      <span id="toggleInfoLink" class="badge badge-primary mb-3" style="background-color: #626f7b; cursor: pointer;">How to use this website...</span>
   </div>
 
   <div id="toggleDiv">
