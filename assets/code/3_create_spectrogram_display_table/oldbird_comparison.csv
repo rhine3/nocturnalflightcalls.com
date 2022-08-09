@@ -1,6 +1,6 @@
 Common Name,Alpha Code,Oldbird Spectrogram,Oldbird Nocturnal Spectrogram,Link
 White-crowned Pigeon,WCPI,N,N,http://oldbird.org/pubs/fcmb/species/doves/wcpi/wcpi.htm
-Eurasion Collared-dove,EUCD,Y,N,http://oldbird.org/pubs/fcmb/species/doves/codo/codo.htm
+Eurasian Collared-dDve,EUCD,Y,N,http://oldbird.org/pubs/fcmb/species/doves/codo/codo.htm
 White-winged Dove,WWDO,N,N,http://oldbird.org/pubs/fcmb/species/doves/wwdo/wwdo.htm
 Mourning Dove,MODO,N,N,http://oldbird.org/pubs/fcmb/species/doves/modo/modo.htm
 Black-billed Cuckoo,BBCU,Y,Y,http://oldbird.org/pubs/fcmb/species/cuckoos/bbcu/bbcu.htm
@@ -44,7 +44,7 @@ Alder Flycatcher,ALFL,Y,N,http://oldbird.org/pubs/fcmb/species/flycatch/alfl/alf
 Willow Flycatcher,WIFL,Y,N,http://oldbird.org/pubs/fcmb/species/flycatch/wifl/wifl.htm
 Least Flycatcher,LEFL,Y,Y,http://oldbird.org/pubs/fcmb/species/flycatch/lefl/lefl.htm
 Eastern Phoebe,EAPH,Y,N,http://oldbird.org/pubs/fcmb/species/flycatch/eaph/eaph.htm
-Vermillion Flycatcher,VEFL,Y,N,http://oldbird.org/pubs/fcmb/species/flycatch/vefl/vefl.htm
+Vermilion Flycatcher,VEFL,Y,N,http://oldbird.org/pubs/fcmb/species/flycatch/vefl/vefl.htm
 Ash-throated Flycatcher,ATFL,Y,N,http://oldbird.org/pubs/fcmb/species/flycatch/atfl/atfl.htm
 Great Crested Flycatcher,GCFL,Y,N,http://oldbird.org/pubs/fcmb/species/flycatch/gcfl/gcfl.htm
 Western Kingbird,WEKI,Y,N,http://oldbird.org/pubs/fcmb/species/flycatch/weki/weki.htm
@@ -106,7 +106,7 @@ European Starling,EUST,Y,Y,http://oldbird.org/pubs/fcmb/species/starlings/eust/e
 American Pipit,AMPI,Y,Y,http://oldbird.org/pubs/fcmb/species/pipits/ampi/ampi.htm
 Sprague's Pipit,SPPI,Y,N,http://oldbird.org/pubs/fcmb/species/pipits/sppi/sppi.htm
 Bohemian Waxwing,BOWA,Y,N,http://oldbird.org/pubs/fcmb/species/waxwings/bowa/bowa.htm
-Cedar Waxwing,CEWA,Y,Y,http://oldbird.org/pubs/fcmb/species/waxwings/cedw/cedw.htm
+Cedar Waxwing,CEDW,Y,Y,http://oldbird.org/pubs/fcmb/species/waxwings/cedw/cedw.htm
 Blue-winged Warbler,BWWA,Y,N,http://oldbird.org/pubs/fcmb/species/warblers/bwwa/bwwa.htm
 Golden-winged Warbler,GWWA,Y,N,http://oldbird.org/pubs/fcmb/species/warblers/gwwa/gwwa.htm
 Tennessee Warbler,TEWA,Y,N,http://oldbird.org/pubs/fcmb/species/warblers/tewa/tewa.htm
