@@ -152,7 +152,7 @@ bp_order = 4
 max_num_examples = 30
 create_audio = True
 save_audio = True
-save_spectrogram = False
+save_spectrogram = True
 
 # Recording length information
 buffer_long_recording_seconds = 1
