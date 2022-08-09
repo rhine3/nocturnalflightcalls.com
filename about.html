@@ -8,12 +8,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   
   <!--Bootstrap-->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   
-  <!--Fancybox-->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
-
   <!--Tagsinput-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
 
@@ -21,38 +19,10 @@
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
-  <link rel="stylesheet" href="library/bootstrap-tagsinput.css">
-  <link rel="stylesheet" href="library/app.css">
-  <link rel="stylesheet" href="library/fancybox.css" type="text/css" media="screen" />
- 
-<script>
+  <link rel="stylesheet" href="css/bootstrap-tagsinput.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/website.css">
 
-    $(function(){
-            $("#neededSpeciesTable").load("needed.html");
-        }); 
-
-</script>
-<style>
-
-/* Basic appearance formatting */
-body {
-  padding: 1% 5%;
-  -webkit-hyphens: auto;
-  -ms-hyphens: auto;
-  hyphens: auto;
-  word-wrap: break-word;
-}
-
-/* Background image and style for navbar */
-.navbar {
-  background-color: #000000;
-  background-image: url('header.png');
-  background-position: right;
-  background-repeat:no-repeat;
-  background-size:90px;
-}
-
-</style>
 </head>
 
 <body>
@@ -69,6 +39,12 @@ body {
         <li class="nav-item active">
           <a class="nav-link ml-5" href="about.html">About <span class="sr-only">(current)</span></a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link ml-5" href="credits.html">Credits</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link ml-5" href="contribute.html">Contribute</a>
+        </li>
       </ul>
     </div>
 </nav>
@@ -76,21 +52,20 @@ body {
   
 <div>
   <div>
-        <h5 class="mt-5">Contributors</h5>
-            <p>This website is a collaboration between the <a href="https://johnfkearney.com/listening-together-project-projet-ecouter-ensemble/">Listening Together Project</a>, the <a href="http://kitzeslab.org">Kitzes Lab</a> at the University of Pittsburgh, and the <a href="https://discovery.acadiau.ca/acwern/home.html">Phil Taylor Lab</a> at Arcadia University.</p>
-            <p>Our initial dataset of flight calls were collected through a series of nocturnal monitoring stations in eastern Canada and identified by John Kearney of the Listening Together Project.</p>
-            <p>This website's header image is a compilation of photos by Geoffrey Gilmour-Taylor (<a href="https://flickr.com/photos/giltay/13979264958">"Oriole in Flight"</a>, CC BY-NC-SA 2.0) and Catherine Singleton (<a href="https://flickr.com/photos/s1ng0/6303898890/">"Moon"</a>, CC BY-SA 2.0).</p>
-        
-        <h5 class="mt-5">Attribution</h5>
-            <p>If you use this website or its media in a project, please provide link to it.</p>
+    <h5 class="mt-5">About</h5>
+        <p>Our initial dataset of flight calls was collected through a series of nocturnal monitoring stations in Nova Scotia and identified by John Kearney of the Listening Together Project. (See <a href="credits.html">Credits</a> for more information.)</p>
+        <p>Identification was based on contextual information and experience, using the Old Bird guide as a foundation.</p>
 
-        <h5 class="mt-5">Additional resources</h5>
-            <p>For a well-maintained document containing resources for those interested in nocturnal flight calls, see <a href="https://docs.google.com/document/d/1YaKaqGodIJnhLMBfQTJAxRnk9Cb4qoE4H1syjpL1Otg/edit">this list</a> by Joe Gyekis and Julia Plummer.</p>
-        
-        <h5 class="mt-5">Contributions welcome</h5>
-        <p>This website is missing flight calls for many common species throughout North America. Listed below are the species for which Oldbird has a page, but for which this website contains fewer than 30 clips.</p>
-        <p>If you are interested in contributing identified recordings of these or other species, please contact Tessa Rhinehart (<a href="mailto:tessa.rhinehart@pitt.edu" target="_blank">tessa.rhinehart@pitt.edu</a>).</p>
-        <div id="neededSpeciesTable" class="ml-5 mr-5"></div>
+    <h5 class="mt-5">Disclaimer</h5>
+      <p>It is important to recognize that the calls on this site are presumed or putative calls. It is likely that some are misidentified.</p> 
+      <p>Since nocturnal flight calls can be plastic and highly similar between species, they often defy 100% certain identification, especially during autonomous nocturnal monitoring.</p>
+      <p>This website is a "first crack" at making this information public. We hope to update and iterate on it as time goes on. </p>
+      
+    <h5 class="mt-5">Philosophy on uncertainty</h5>
+      <p>The goal of this website is to advance our knowledge of nocturnal flight calls and to make their identification more accessible.</p>
+      <p>Identification of nocturnal flight calls is far from a solved problem: it is a work in progress. It has even evolved over the course of identifying the sounds contained in this guide.</p>
+      <p>Attempting to identify bioacoustic complexes, such as the "Zeep" complex, is one way to push forward our understanding of these complexes, although it introduces noise (errors).</p> 
+      <p>One approach is to avoid introducing error by leaving these challenging groups unidentified. Instead, our philosophy is to attempt the identification, then take use appropriate scientific and statistical methodology to account for errors.</p>
     </div>
 </div>
 </body>
