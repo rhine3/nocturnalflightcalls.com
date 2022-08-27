@@ -13,15 +13,19 @@ table {
     border-collapse: collapse;
     width: 100%;
     table-layout: fixed;
-    margin-top: 10px;
+    margin-top: 3em;
 }
 
 td, th {
     border: 1px solid #dddddd;
     text-align: left;
-    padding: 10px;
-    margin-inline: 10px;
+    padding: 1em;
+    margin-inline: 1em;
 }
+
+body,h5 {
+    font-size: 1.6rem;
+ }
   
 /* The informational text is off to start */
 #toggleDiv {
@@ -39,8 +43,8 @@ td, th {
     overflow: hidden;
 }
   
-#filterInput:placeholder {
-    overflow: visible !important;
+#filterInput {
+    width: 5rem;
 }
   
 /* Styling for overlays */
@@ -76,5 +80,17 @@ div>.active{
     background-image: url('/header/header.png');
     background-position: right;
     background-repeat:no-repeat;
-    background-size:90px;
+    background-size: 6em;
+}
+
+
+.form-switch.form-switch-md {
+    padding-left: 4.5em;
+    height: 2em;
+}
+
+.form-switch.form-switch-md .form-check-input {
+    margin-left: -4.5em;
+    height: 1.5em;
+    width: 3em;
 }
