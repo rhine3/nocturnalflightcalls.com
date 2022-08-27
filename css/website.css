@@ -23,10 +23,6 @@ td, th {
     margin-inline: 1em;
 }
 
-body,h5 {
-    font-size: 1.6rem;
- }
-  
 /* The informational text is off to start */
 #toggleDiv {
     display: none;
@@ -79,8 +75,9 @@ div>.active{
     background-color: #000000;
     background-image: url('/header/header.png');
     background-position: right;
-    background-repeat:no-repeat;
-    background-size: 6em;
+    background-repeat: no-repeat;
+    background-size: 4.5em;
+    background-position-y: 0px;
 }
 
 
