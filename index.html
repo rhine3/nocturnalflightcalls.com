@@ -39,9 +39,8 @@
 
     // Toggle hidden column when the button is pressed
     // Keeping onclick approach for this because specifying arguments in buttons is helpful
-    function toggleHiddenColumn(col, btnid) {
+    function toggleHiddenColumn(col, btnclass) {
       $("." + col).toggle();
-      
     };
 
     // Show and hide info at the top of the page when the info link is clicked
@@ -173,7 +172,7 @@
 </style>
 
 <body>
-<div id="loadingOverlay" class="text-center justify-content-center ">
+<div id="loadingOverlay" class="text-center justify-content-center">
   <div class="spinner-border" id="overlaySpinner" role="status">
     <span class="sr-only">Loading...</span>
   </div>
@@ -203,60 +202,64 @@
 </nav>
 
 <div id="maincontent" class="container-fluid">
-  <div>
+  <div class="row">
+    <div class="column">
       <h5>Welcome!</h5>
       <p>This website acts as a quick reference to many of the nocturnal flight calls of birds of North America.</p>
       <p>Calls displayed here were collected via remote acoustic recordings. As such, there is some degree of uncertainty in their identification. Read more about this process on the <a href="about.html">About</a> page.</p> 
       
       <span id="infoToggler" onclick="toggleInfoLink()" class="badge badge-primary mb-3" style="background-color: #626f7b; cursor: pointer;">How to use this website...</span>
+    </div>
   </div>
 
-  <div id="toggleDiv" class="container-fluid">
-    <p>By default, the website displays the common name, the scientific name, and a handful of example spectrograms for each species.</p> 
-    <p>About spectrograms:
-      <ul>
-        <li>Spectrograms are displayed with labels in milliseconds (horizontal axis) and kilohertz (vertical axis)</li>
-        <li>Click a row to display additional spectrograms. Click again to collapse the row</li>
-        <li>Click any spectrogram to listen to the sound. Click outside of the playback controls or hit "Esc" to exit the playback.</li>
-        <li>All recordings used to generate the spectrograms on this website are available for download by clicking on the spectrogram.</li>
-      </ul></p>
+  <div id="toggleDiv" class="row">
+    <div class="column">
+      <p>By default, the website displays the common name, the scientific name, and a handful of example spectrograms for each species.</p> 
+      <p>About spectrograms:
+        <ul>
+          <li>Spectrograms are displayed with labels in milliseconds (horizontal axis) and kilohertz (vertical axis)</li>
+          <li>Click a row to display additional spectrograms. Click again to collapse the row</li>
+          <li>Click any spectrogram to listen to the sound. Click outside of the playback controls or hit "Esc" to exit the playback.</li>
+          <li>All recordings used to generate the spectrograms on this website are available for download by clicking on the spectrogram.</li>
+        </ul></p>
+    </div>
 
-    <p>Use the <b>Display columns</b> selector to show or hide additional information about each species.</p>
-    
-    <p>Use the <b>Filter species</b> functionality to limit which species are displayed:</p>
-      <ul>
-        <li> Filter by any information available in the columns. For example, try...
-          <ul>
-            <li>Bioacoustic categories, e.g. <code>zeep</code>, <code>double-banded upsweep</code></li>
-            <li>Taxonomic categories, e.g. <code>charadriiformes</code>, <code>setophaga</code></li>
-            <li>Four-letter alpha codes, e.g. <code>amro</code>, <code>oven</code></li>
-          </ul>
-        </li>
-        <li> Press Enter/Return between each keyword to add it to the search</li> 
-        <li> Click the "Filter" button (or use Tab + Enter) to apply the filters</li>
-        <li> Species that match any keyword will be displayed, e.g., searching for two alpha codes allows direct comparison of the species</li> 
-        <li> Click the "Clear filters" button to display the whole list</li>
-      </ul>
-    
-
-
+    <div class="column">
+      <p>Use the <b>Display columns</b> selector to show or hide additional information about each species.</p>
+      <p>Use the <b>Filter species</b> functionality to limit which species are displayed:</p>
+        <ul>
+          <li> Filter by any information available in the columns. For example, try...
+            <ul>
+              <li>Bioacoustic categories, e.g. <code>zeep</code>, <code>double-banded upsweep</code></li>
+              <li>Taxonomic categories, e.g. <code>charadriiformes</code>, <code>setophaga</code></li>
+              <li>Four-letter alpha codes, e.g. <code>amro</code>, <code>oven</code></li>
+            </ul>
+          </li>
+          <li> Press Enter/Return between each keyword to add it to the search</li> 
+          <li> Click the "Filter" button (or use Tab + Enter) to apply the filters</li>
+          <li> Species that match any keyword will be displayed, e.g., searching for two alpha codes allows direct comparison of the species</li> 
+          <li> Click the "Clear filters" button to display the whole list</li>
+        </ul>
+    </div>
   </div>
 </div>
 
 <div class="container-fluid">
   <!--Tagsinput form-->
-  <form style="padding-bottom: 3em;">
-    <div class="col-md-3">
-      <label for="filterInput" class="col-form-label">Filter species</label>
-    </div>
+  <form style="padding-bottom: 1em;">
+    <div class="row">
+      <div class="col col-12 col-lg-2">
+        <label for="filterInput" class="col-form-label">Filter species</label>
+      </div>
 
-    <div class="col col-md-6 btn-group">
-      <select multiple data-role="tagsinput" id="filterInput" name="filterInput" placeholder="Press Enter to add filter" ></select> 
-    </div>
+        <div class="col" style="padding-right:0px;">
+          <select multiple data-role="tagsinput" id="filterInput" name="filterInput" placeholder="Press Enter to add filter" ></select> 
+        </div>
 
-    <div class="col col-lg-3 btn-group">
-      <button type='button' class='btn btn-success' id="filterButton">Filter</button>
-      <button type='button' class='btn btn-primary' id="clearFiltersButton">Clear filters</button>
+        <div class="col col-5 col-lg-3 btn-group" style="padding-left:10px;">
+          <button type='button' class='btn btn-success' id="filterButton">Filter</button>
+          <button type='button' class='btn btn-primary' id="clearFiltersButton">Clear filters</button>
+        </div>
     </div>
   </form>
 
@@ -275,44 +278,53 @@
   -->
 
 
-<form>
-  <div class="col-md-3">
-      <label for="filterInput" class="col-form-label">Display columns</label>
-  </div>
-
-  <div class="col col-lg-9 form-row">
-      <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <label class="btn btn-primary active" id="species_button">
-              <input type="checkbox" name="options" autocomplete="off" checked onchange="toggleHiddenColumn('species', 'species_button')"> Species
-          </label>
-          <label class="btn btn-primary" id="alpha_code_button">
-              <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('alpha_code', 'alpha_code_button')"> Code
-          </label>
-          <label class="btn btn-primary" id="order_button">
-              <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('order', 'order_button')"> Order
-          </label>
-          <label class="btn btn-primary" id="family_button">
-              <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('family', 'family_button')"> Family
-          </label>
-          <label class="btn btn-primary" id="bioacoustic_category_button">
-              <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('bioacoustic_category', 'bioacoustic_category_button')"> Category
-          </label>
-          <label class="btn btn-primary" id="oldbird_link_button">
-              <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('oldbird_link', 'oldbird_link_button')"> OldBird link
-          </label>
-          <label class="btn btn-primary" id="high_or_low_button">
-              <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('high_or_low', 'high_or_low_button')"> Frequency
-          </label>
-          <label class="btn btn-primary active" id="spectrograms_button">
-              <input type="checkbox" name="options" autocomplete="off" checked onchange="toggleHiddenColumn('spectrograms', 'spectrograms_button')"> Spectrograms
-          </label>
+  <form>
+    <!--Button group for columns-->
+    <div class="row">
+      <div class="col col-12 col-lg-2">
+          <label for="filterInput" class="col-form-label">Display columns</label>
       </div>
-  </div>
-</form>
+      <div class="col col-lg-10 btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-primary active species_button">
+            <input type="checkbox" name="options" autocomplete="off" checked onchange="toggleHiddenColumn('species', 'species_button')"> Species
+        </label>
+        <label class="btn btn-primary" id="alpha_code_button">
+            <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('alpha_code', 'alpha_code_button')"> Code
+        </label>
+        <label class="btn btn-primary" id="order_button">
+            <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('order', 'order_button')"> Order
+        </label>
+        <label class="btn btn-primary" id="family_button">
+            <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('family', 'family_button')"> Family
+        </label>
+        <label class="btn btn-primary" id="bioacoustic_category_button">
+            <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('bioacoustic_category', 'bioacoustic_category_button')"> Category
+        </label>
+        <label class="btn btn-primary" id="oldbird_link_button">
+            <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('oldbird_link', 'oldbird_link_button')"> OldBird link
+        </label>
+        <label class="btn btn-primary" id="high_or_low_button">
+            <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('high_or_low', 'high_or_low_button')"> Frequency
+        </label>
+        <label class="btn btn-primary active" id="spectrograms_button">
+            <input type="checkbox" name="options" autocomplete="off" checked onchange="toggleHiddenColumn('spectrograms', 'spectrograms_button')"> Spectrograms
+        </label>
+      </div>
+    </div>
+    
 
 
-</form>
+    <!--Idea: Button group for desktop (d-none, d-md-block)-->
+    <!--<div class="row d-none d-md-block">-->
+
+    <!--Idea: Button dropdown for mobile (d-md-none)-->
+    <!--<div class="row d-md-none">-->
+
+  </form>
 </div>
+
+</form>
+
 
 <div id="includedTable" class="container-fluid"></div>
 
