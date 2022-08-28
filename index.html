@@ -45,17 +45,48 @@
     };
 
     // Show and hide info at the top of the page when the info link is clicked
-    $('#toggleInfoLink').click(function() {
+    function toggleInfoLink(){
       $('#toggleDiv').toggle();
-      $('#toggleInfoLink').html(
-        ($("#toggleInfoLink").html() === "How to use this website...") ? "Show less information" : "How to use this website..."
+      $('#infoToggler').html(
+        ($("#infoToggler").html() === "How to use this website...") ? "Show less information" : "How to use this website..."
       );
-    });
+    };
+
+
+    // Display an audio overlay box
+    function overlayOn(overlayId) {
+      parent = document.getElementById(overlayId);
+      // Lazy-load the audio and image
+      thisAudio = parent.querySelector('audio');
+      thisAudio.setAttribute('src', thisAudio.getAttribute('data-src'));
+      //thisImage = parent.querySelector('img');
+      //thisImage.setAttribute('src', thisImage.getAttribute('data-src'));
+
+      parent.style.display = "block";
+      thisAudio.play();
+
+      // Enable use of ESC to close overlay box
+      document.addEventListener('keyup', (e) => {
+        if (e.key === "Escape") {
+          overlayOff(parent);
+        }
+      });
+    };
+
+    // Close the audio overlay box
+    function overlayOff(activeOverlay) {
+      sound = activeOverlay.querySelector('audio');
+      sound.pause();
+      sound.currentTime = 0;
+      activeOverlay.style.display = "none";
+    };
+
 
     $(document).ready(function() {
-
       // Toggle the height of the spectrogram div in a species row when it is clicked
-      // Need to use delegated method (.on instead of .click) because external table is loaded
+      // Because external table is loaded:
+      // - Needs to be in document.ready
+      // - Need to use delegated method (.on instead of .click) because external table is loaded
       $('#includedTable').on("click", ".species_row", function(e) {
         if (!($(e.target).is('img') | $(e.target).is('div'))) {
           $(this).find('.spectrogramContainer').css("height",
@@ -65,6 +96,7 @@
       });
 
       // Filter the table when the "Filter" button is pressed
+      // Needs to be in $(document).ready()
       $('#filterButton').click(function() {
         var filters = $("#filterInput").val(); // Get all the user-defined filters
         $("#nfcTable tr").filter( // for all <tr>s in nfcTable:
@@ -81,6 +113,7 @@
       });
 
       // Remove filter tags and show all columns when the "Clear filters" button is pressed
+      // Needs to be in $(document).ready()
       $('#clearFiltersButton').click(function() {
         $("#nfcTable tr").show();
         // Remove the user-inserted filters
@@ -89,6 +122,7 @@
 
 
       // To destroy the table of spectrograms
+      // Needs to be in $(document).ready()
       $('#toggleDenoised').change(function() {
         $("#includedTable").empty(); // Remove what is currently in the table
         $('#loadingOverlay').css("visibility", "visible");
@@ -111,35 +145,7 @@
         }
       });
 
-      // Display an audio overlay box
-      function overlayOn(overlayId) {
-        parent = document.getElementById(overlayId);
-        // Lazy-load the audio and image
-        thisAudio = parent.querySelector('audio');
-        thisAudio.setAttribute('src', thisAudio.getAttribute('data-src'));
-        //thisImage = parent.querySelector('img');
-        //thisImage.setAttribute('src', thisImage.getAttribute('data-src'));
-
-        parent.style.display = "block";
-        thisAudio.play();
-
-        // Enable use of ESC to close overlay box
-        document.addEventListener('keyup', (e) => {
-          if (e.key === "Escape") {
-            overlayOff(parent);
-          }
-        });
-      };
-
-      // Close the audio overlay box
-      function overlayOff(activeOverlay) {
-        sound = activeOverlay.querySelector('audio');
-        sound.pause();
-        sound.currentTime = 0;
-        activeOverlay.style.display = "none";
-      }
     });
-
 
     </script>
 </head>
@@ -201,8 +207,8 @@
       <h5>Welcome!</h5>
       <p>This website acts as a quick reference to many of the nocturnal flight calls of birds of North America.</p>
       <p>Calls displayed here were collected via remote acoustic recordings. As such, there is some degree of uncertainty in their identification. Read more about this process on the <a href="about.html">About</a> page.</p> 
-      <p></p>
-      <span id="toggleInfoLink" class="badge badge-primary mb-3" style="background-color: #626f7b; cursor: pointer;">How to use this website...</span>
+      
+      <span id="infoToggler" onclick="toggleInfoLink()" class="badge badge-primary mb-3" style="background-color: #626f7b; cursor: pointer;">How to use this website...</span>
   </div>
 
   <div id="toggleDiv" class="container-fluid">
