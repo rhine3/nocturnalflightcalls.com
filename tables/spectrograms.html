@@ -1,34 +1,4 @@
 
-<form class="form-block">
-<div class="form-row">
-    <label for="colButtons" class="col-lg-2 col-form-label">Display columns</label>
-    <div class="col btn-group btn-group-toggle" data-toggle="buttons" id="colButtons">
-        <label class="btn btn-primary active" id="species_button">
-            <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('species', 'species_button')"> Species
-        </label>
-    <label class="btn btn-primary" id="alpha_code_button">
-        <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('alpha_code', 'alpha_code_button')"> Code
-    </label>
-    <label class="btn btn-primary" id="order_button">
-        <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('order', 'order_button')"> Order
-    </label>
-    <label class="btn btn-primary" id="family_button">
-        <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('family', 'family_button')"> Family
-    </label>
-    <label class="btn btn-primary" id="bioacoustic_category_button">
-        <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('bioacoustic_category', 'bioacoustic_category_button')"> Category
-    </label>
-    <label class="btn btn-primary" id="oldbird_link_button">
-        <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('oldbird_link', 'oldbird_link_button')"> OldBird link
-    </label>
-    <label class="btn btn-primary" id="high_or_low_button">
-        <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('high_or_low', 'high_or_low_button')"> Frequency
-    </label>
-    <label class="btn btn-primary active" id="spectrograms_button">
-        <input type="checkbox" name="options" autocomplete="off" checked onchange="toggleHiddenColumn('spectrograms', 'spectrograms_button')"> Spectrograms
-    </label>
-</div>
-</form>
 <table>
   <thead>
       <tr>
@@ -11878,33 +11848,7 @@
             </div>
         </td>
     </tr>
-    <tr class="species_row">
-        <td class="species">Horned Lark (<i>Eremophila alpestris</i>)</td>
-        <td class="alpha_code" style="display:none;">HOLA</td>
-        <td class="order" style="display:none;">Passeriformes</td>
-        <td class="family" style="display:none;">Alaudidae</td>
-        <td class="bioacoustic_category" style="display:none;"></td>
-        <td class="oldbird_link" style="display:none;"><a href="http://oldbird.org/pubs/fcmb/species/larks/hola/hola.htm" target="_blank">Link</a></td>
-        <td class="high_or_low" style="display:none;">Middle, High</td>
-        <td class="spectrograms">
-            <div class="spectrogramContainer">
-                
-            <img 
-                src="media/HOLA/spectrograms/BERI1-20181023_185800_PASSERIFORMES_ALAUDIDAE_EREMOPHILA_ALPESTRIS_HOLA_10834.133_10835.465_display.jpg" style="margin: 2px 2px 2px 2px; float: left;"
-                height="100" onclick="overlayOn('HOLA1')">
-
-                
-    <div class="overlay" id="HOLA1" onclick="overlayOff(this)">
-        <div class="audiobox">
-            <audio controls
-                data-src="media/HOLA/audio/BERI1-20181023_185800_PASSERIFORMES_ALAUDIDAE_EREMOPHILA_ALPESTRIS_HOLA_10834.133_10835.465.wav">
-            </audio>
-        </div>
-    </div>
-
-            </div>
-        </td>
-    </tr>
+   
     <tr class="species_row">
         <td class="species">Tree Swallow (<i>Tachycineta bicolor</i>)</td>
         <td class="alpha_code" style="display:none;">TRES</td>
@@ -34204,5 +34148,7 @@
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('loadingOverlay').style.visibility="hidden";
-  })
+  });
+
+
 </script>

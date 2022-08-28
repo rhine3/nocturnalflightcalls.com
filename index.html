@@ -37,15 +37,22 @@
       );
     }); 
 
-    $(document).ready(function() {
+    // Toggle hidden column when the button is pressed
+    // Keeping onclick approach for this because specifying arguments in buttons is helpful
+    function toggleHiddenColumn(col, btnid) {
+      $("." + col).toggle();
+      
+    };
 
-      // Show and hide info at the top of the page when the info link is clicked
-      $('#toggleInfoLink').click(function() {
-        $('#toggleDiv').toggle();
-        $('#toggleInfoLink').html(
-          ($("#toggleInfoLink").html() === "How to use this website...") ? "Show less information" : "How to use this website..."
-        );
-      });
+    // Show and hide info at the top of the page when the info link is clicked
+    $('#toggleInfoLink').click(function() {
+      $('#toggleDiv').toggle();
+      $('#toggleInfoLink').html(
+        ($("#toggleInfoLink").html() === "How to use this website...") ? "Show less information" : "How to use this website..."
+      );
+    });
+
+    $(document).ready(function() {
 
       // Toggle the height of the spectrogram div in a species row when it is clicked
       // Need to use delegated method (.on instead of .click) because external table is loaded
@@ -71,14 +78,14 @@
             }
           }
         );
-      })
+      });
 
       // Remove filter tags and show all columns when the "Clear filters" button is pressed
       $('#clearFiltersButton').click(function() {
         $("#nfcTable tr").show();
         // Remove the user-inserted filters
         $('#filterInput').tagsinput('removeAll');
-      })
+      });
 
 
       // To destroy the table of spectrograms
@@ -104,13 +111,6 @@
         }
       });
 
-      // Toggle hidden column when the button is pressed
-      // Keeping onclick approach for this because specifying arguments in buttons is helpful
-      function toggleHiddenColumn(col, btnid) {
-        $("." + col).toggle();
-        
-      };
-
       // Display an audio overlay box
       function overlayOn(overlayId) {
         parent = document.getElementById(overlayId);
@@ -129,7 +129,7 @@
             overlayOff(parent);
           }
         });
-      }
+      };
 
       // Close the audio overlay box
       function overlayOff(activeOverlay) {
@@ -138,7 +138,7 @@
         sound.currentTime = 0;
         activeOverlay.style.display = "none";
       }
-    })
+    });
 
 
     </script>
@@ -238,7 +238,8 @@
 </div>
 
 <div class="container-fluid">
-  <form style="padding-bottom: 3rem;">
+  <!--Tagsinput form-->
+  <form style="padding-bottom: 3em;">
     <div class="col-md-3">
       <label for="filterInput" class="col-form-label">Filter species</label>
     </div>
@@ -252,8 +253,10 @@
       <button type='button' class='btn btn-primary' id="clearFiltersButton">Clear filters</button>
     </div>
   </form>
+
+  <!--Denoised spectrogram form-->
+  <!--<div class="col col-md-3">
   <form style="padding-bottom: 3rem;">
-    <div class="col col-md-3">
       <label for="toggleDenoised" class="form-check-label">Denoised spectrograms</label>
     </div>
 
@@ -262,11 +265,54 @@
         <input class="form-check-input" type="checkbox" role="switch" id="toggleDenoised" style="outline: none !important;">
       </div>
     </div>
-    
   </form>
+  -->
+
+
+<form>
+  <div class="col-md-3">
+      <label for="filterInput" class="col-form-label">Display columns</label>
+  </div>
+
+  <div class="col col-lg-9 form-row">
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-primary active" id="species_button">
+              <input type="checkbox" name="options" autocomplete="off" checked onchange="toggleHiddenColumn('species', 'species_button')"> Species
+          </label>
+          <label class="btn btn-primary" id="alpha_code_button">
+              <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('alpha_code', 'alpha_code_button')"> Code
+          </label>
+          <label class="btn btn-primary" id="order_button">
+              <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('order', 'order_button')"> Order
+          </label>
+          <label class="btn btn-primary" id="family_button">
+              <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('family', 'family_button')"> Family
+          </label>
+          <label class="btn btn-primary" id="bioacoustic_category_button">
+              <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('bioacoustic_category', 'bioacoustic_category_button')"> Category
+          </label>
+          <label class="btn btn-primary" id="oldbird_link_button">
+              <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('oldbird_link', 'oldbird_link_button')"> OldBird link
+          </label>
+          <label class="btn btn-primary" id="high_or_low_button">
+              <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('high_or_low', 'high_or_low_button')"> Frequency
+          </label>
+          <label class="btn btn-primary active" id="spectrograms_button">
+              <input type="checkbox" name="options" autocomplete="off" checked onchange="toggleHiddenColumn('spectrograms', 'spectrograms_button')"> Spectrograms
+          </label>
+      </div>
+  </div>
+</form>
+
+
+</form>
 </div>
 
 <div id="includedTable" class="container-fluid"></div>
 
 </body>
 </html>
+
+<script>
+
+</script>
