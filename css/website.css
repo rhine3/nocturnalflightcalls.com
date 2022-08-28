@@ -73,7 +73,7 @@ div>.active{
 /* Background image and style for navbar */
 .navbar {
     background-color: #000000;
-    background-image: url('/header/header.png');
+    background-image: url('https://rhine3.github.io/nfcs2/header/header.png');
     background-position: right;
     background-repeat: no-repeat;
     background-size: 4.5em;
