@@ -38,6 +38,10 @@ td, th {
     height: 102px;
     overflow: hidden;
 }
+
+.spectrogramContainer img {
+    cursor: pointer;
+}
   
 #filterInput {
     width: 5rem;
@@ -90,4 +94,9 @@ div>.active{
     margin-left: -4.5em;
     height: 1.5em;
     width: 3em;
+}
+
+#nfcTable img {
+    margin: 2px 2px 2px 2px;
+    float: left;
 }
