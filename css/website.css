@@ -1,7 +1,7 @@
 
 /* Basic appearance formatting */
 body {
-    padding: 1% 5%;
+    padding: 1.5em 3em;
     -webkit-hyphens: auto;
     -ms-hyphens: auto;
     hyphens: auto;
