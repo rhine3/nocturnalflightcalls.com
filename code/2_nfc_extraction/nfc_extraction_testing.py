@@ -69,7 +69,7 @@ def sec_reformatter(tick_val_sec, pos):
 
 # Function to save nice-looking spectrograms (using the functions above for formatting)
 
-# In[8]:
+# In[6]:
 
 
 plt.rcParams['figure.dpi'] = 300
@@ -129,7 +129,7 @@ def save_or_plot_spectrogram(s, filename, duration, save=True, pixels_tall=133, 
 # 
 # This step takes a while...
 
-# In[9]:
+# In[7]:
 
 
 keys = list(tables_to_filenames.keys()) 
@@ -154,7 +154,7 @@ all_annots_df.reset_index(drop=True, inplace=True)
 
 # Remove unknowns
 
-# In[10]:
+# In[8]:
 
 
 no_qs = all_annots_df[all_annots_df["Alpha code"] != '?']
@@ -163,7 +163,7 @@ shuffled = no_qs.sample(frac=1, random_state=42)
 
 # Calls that we've decided should be excluded due to quality, etc.
 
-# In[11]:
+# In[9]:
 
 
 exclusions = pd.read_csv("exclusions.csv").filename_no_extension.tolist()
@@ -174,7 +174,7 @@ exclusions
 # 
 # Takes a while...
 
-# In[12]:
+# In[10]:
 
 
 code_counts = {}
@@ -195,13 +195,13 @@ for idx, row in shuffled.iterrows():
 idxs.sort()
 
 
-# In[13]:
+# In[11]:
 
 
 len(idxs)
 
 
-# In[14]:
+# In[12]:
 
 
 idxs[:5]
@@ -209,7 +209,7 @@ idxs[:5]
 
 # Subset those indices from the main table.
 
-# In[15]:
+# In[13]:
 
 
 sampled_calls = all_annots_df.iloc[idxs]
@@ -220,7 +220,23 @@ sampled_calls.head()
 
 # ### Spectrogram creation parameters
 
-# In[16]:
+# In[17]:
+
+
+def is_notebook() -> bool:
+    try:
+        shell = get_ipython().__class__.__name__
+        if shell == 'ZMQInteractiveShell':
+            return True   # Jupyter notebook or qtconsole
+        elif shell == 'TerminalInteractiveShell':
+            return False  # Terminal running IPython
+        else:
+            return False  # Other type (?)
+    except NameError:
+        return False      # Probably standard Python interpreter
+
+
+# In[20]:
 
 
 # Spectrogram creation parameters
@@ -237,17 +253,24 @@ bp_order = 4
 
 # How many spectrograms to create and where to save them
 max_num_examples = 30
-create_audio = True
-save_audio = True
-save_long_spectrogram = True
-save_short_spectrogram = True
+if is_notebook():
+    create_audio = False
+    save_audio = False
+    save_long_spectrogram = False
+    save_short_spectrogram = False
+
+else:
+    create_audio = True
+    save_audio = True
+    save_long_spectrogram = True
+    save_short_spectrogram = True
 
 # Recording length information
 buffer_long_recording_seconds = 1
 buffer_short_recording_multiplier = 1
 
 
-# In[17]:
+# In[15]:
 
 
 def find_segment_start_and_duration(
@@ -318,7 +341,7 @@ print(
 # * `_display.jpg` - jpg for long segment, bandpassed but not denoised
 # * `_display_denoised.jpg` - jpg for long segment, bandpassed and denoised.
 
-# In[18]:
+# In[21]:
 
 
 media_path = Path("../../media")
@@ -386,7 +409,7 @@ for idx, row in sampled_calls.reset_index(drop=True).iterrows():
     short_segment = Audio.from_file(audio_file, sample_rate=sample_rate, offset=short_seg_start, duration=short_seg_dur)
     
     # Normalize samples
-    neg_3_db = 0.7080078
+    neg_3_db = 0.2#0.7080078
     multiplier = neg_3_db / max(abs(short_segment.samples))
     short_segment.samples = short_segment.samples * multiplier
     
@@ -409,10 +432,15 @@ for idx, row in sampled_calls.reset_index(drop=True).iterrows():
         denoised_spec,
         filename=str(spectrogram_filename_denoise), duration=short_seg_dur, save=save_short_spectrogram
     )
+    
+    if is_notebook():
+        if idx>5:
+            break
+
 
 # ## Save record of clips
 
-# In[20]:
+# In[22]:
 
 
 metadata_df = pd.DataFrame(metadata, columns=[
@@ -420,6 +448,21 @@ metadata_df = pd.DataFrame(metadata, columns=[
     'annotation_start_time', 'annotation_end_time', 'audio_clip_start_time'])
 metadata_df.to_csv("clip_metadata.csv")
 
+
+# In[24]:
+
+
+if not is_notebook():
+    quit()
+
+
+# In[25]:
+
+
+get_ipython().system('jupyter nbconvert --to python nfc_extraction_testing.ipynb')
+
+
+# In[ ]:
 
 
 
