@@ -41,6 +41,7 @@ td, th {
 
 .spectrogramContainer img {
     cursor: pointer;
+    border-bottom:1px solid black;
 }
   
 #filterInput {
