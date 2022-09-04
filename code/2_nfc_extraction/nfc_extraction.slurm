@@ -13,6 +13,6 @@ module load python/3.7.0 venv/wrap
 
 workon opso_dev
 
-python nfc_extraction.py
+python nfc_extraction_testing.py
 
 crc-job-stats.py
