@@ -13,16 +13,16 @@ table {
     border-collapse: collapse;
     width: 100%;
     table-layout: fixed;
-    margin-top: 10px;
+    margin-top: 3em;
 }
 
 td, th {
     border: 1px solid #dddddd;
     text-align: left;
-    padding: 10px;
-    margin-inline: 10px;
+    padding: 1em;
+    margin-inline: 1em;
 }
-  
+
 /* The informational text is off to start */
 #toggleDiv {
     display: none;
@@ -38,9 +38,13 @@ td, th {
     height: 102px;
     overflow: hidden;
 }
+
+.spectrogramContainer img {
+    cursor: pointer;
+}
   
-#filterInput:placeholder {
-    overflow: visible !important;
+#filterInput {
+    width: 5rem;
 }
   
 /* Styling for overlays */
@@ -73,8 +77,26 @@ div>.active{
 /* Background image and style for navbar */
 .navbar {
     background-color: #000000;
-    background-image: url('/header/header.png');
+    background-image: url('https://rhine3.github.io/nfcs2/header/header.png');
     background-position: right;
-    background-repeat:no-repeat;
-    background-size:90px;
+    background-repeat: no-repeat;
+    background-size: 4.5em;
+    background-position-y: 1px;
+}
+
+
+.form-switch.form-switch-md {
+    padding-left: 4.5em;
+    height: 2em;
+}
+
+.form-switch.form-switch-md .form-check-input {
+    margin-left: -4.5em;
+    height: 1.5em;
+    width: 3em;
+}
+
+#nfcTable img {
+    margin: 2px 2px 2px 2px;
+    float: left;
 }

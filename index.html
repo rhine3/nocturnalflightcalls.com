@@ -1,22 +1,24 @@
 <!DOCTYPE html> <!--HTML 5-->
 <html lang="en">
 <head>
-<title>Nocturnal Bird Flight Calls of North America</title>
+  <title>Nocturnal Bird Flight Calls of North America</title>
 
   <!--Jquery-->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   
   <!--Bootstrap-->
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+  <!--Make responsive-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <!--Tagsinput-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
 
-  <meta name="robots" content="index, follow" />
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <!--Character set-->
+  <meta charset="utf-8" /> 
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/bootstrap-tagsinput.css">
@@ -35,56 +37,19 @@
       );
     }); 
 
-    $(document).ready(function() {
-
-      // Show and hide info at the top of the page when the info link is clicked
-      $('#toggleInfoLink').click(function() {
-        $('#toggleDiv').toggle();
-        $('#toggleInfoLink').html(
-          ($("#toggleInfoLink").html() === "How to use this website...") ? "Show less information" : "How to use this website..."
-        );
-      });
-
-      // Toggle the height of the spectrogram div in a species row when it is clicked
-      // Need to use delegated method (.on instead of .click) because external table is loaded
-      $('#includedTable').on("click", ".species_row", function(e) {
-        if (!($(e.target).is('img') | $(e.target).is('div'))) {
-          $(this).find('.spectrogramContainer').css("height",
-            ($(this).find('.spectrogramContainer').css("height") === "102px") ? "auto" : "102px"
-          )
-        };
-      });
-
-      // Filter the table when the "Filter" button is pressed
-      $('#filterButton').click(function() {
-        var filters = $("#filterInput").val(); // Get all the user-defined filters
-        $("#nfcTable tr").filter( // for all <tr>s in nfcTable:
-          function(){
-            // Only show the trs of interest
-            var reg = new RegExp(filters.join('|'), "i")
-            if (reg.test($(this).text())){
-              $(this).show()
-            } else {
-              $(this).hide()
-            }
-          }
-        );
-      })
-
-      // Remove filter tags and show all columns when the "Clear filters" button is pressed
-      $('#clearFiltersButton').click(function() {
-        $("#nfcTable tr").show();
-        // Remove the user-inserted filters
-        $('#filterInput').tagsinput('removeAll');
-      })
-    })
-
     // Toggle hidden column when the button is pressed
     // Keeping onclick approach for this because specifying arguments in buttons is helpful
-    function toggleHiddenColumn(col, btnid) {
+    function toggleHiddenColumn(col, btnclass) {
       $("." + col).toggle();
-      
-     };
+    };
+
+    // Show and hide info at the top of the page when the info link is clicked
+    function toggleInfoLink(){
+      $('#toggleDiv').toggle();
+      $('#infoToggler').html(
+        ($("#infoToggler").html() === "How to use this website...") ? "Show less information" : "How to use this website..."
+      );
+    };
 
     // Display an audio overlay box
     function overlayOn(overlayId) {
@@ -104,8 +69,7 @@
           overlayOff(parent);
         }
       });
-
-    }
+    };
 
     // Close the audio overlay box
     function overlayOff(activeOverlay) {
@@ -113,7 +77,74 @@
       sound.pause();
       sound.currentTime = 0;
       activeOverlay.style.display = "none";
-    }
+    };
+
+    $(document).ready(function() {
+      // Toggle the height of the spectrogram div in a species row when it is clicked
+      // Because external table is loaded:
+      // - Needs to be in document.ready
+      // - Need to use delegated method (.on instead of .click) because external table is loaded
+      $('#includedTable').on("click", ".species_row", function(e) {
+        if (!($(e.target).is('img') | $(e.target).hasClass('overlay'))) {
+          $(this).find('.spectrogramContainer').css("height",
+            ($(this).find('.spectrogramContainer').css("height") === "102px") ? "auto" : "102px"
+          )
+        };
+      });
+
+      // Filter the table when the "Filter" button is pressed
+      // Needs to be in $(document).ready()
+      $('#filterButton').click(function() {
+        var filters = $("#filterInput").val(); // Get all the user-defined filters
+        $("#nfcTable").hide()
+        $("#nfcTable tr").filter( // for all <tr>s in nfcTable:
+          function(){
+            // Only show the trs of interest
+            var reg = new RegExp(filters.join('|'), "i")
+            if (reg.test($(this).text())){
+              $(this).show()
+            } else {
+              $(this).hide()
+            }
+          }
+        );
+        $("#nfcTable").show()
+      });
+
+      // Remove filter tags and show all columns when the "Clear filters" button is pressed
+      // Needs to be in $(document).ready()
+      $('#clearFiltersButton').click(function() {
+        $("#nfcTable tr").show();
+        // Remove the user-inserted filters
+        $('#filterInput').tagsinput('removeAll');
+      });
+
+
+      // To destroy the table of spectrograms
+      // Needs to be in $(document).ready()
+      $('#toggleDenoised').change(function() {
+        $("#includedTable").empty(); // Remove what is currently in the table
+        $('#loadingOverlay').css("visibility", "visible");
+        if ($(this).prop('checked')) { //Load denoised
+          $(function(){
+            $("#includedTable").load(
+              "tables/spectrograms_denoised.html",
+              complete=function(response, status, request){
+                $('#loadingOverlay').css("visibility", "hidden");
+              }
+            );
+          }); 
+        } else { // Load regular
+          $("#includedTable").load(
+            "tables/spectrograms.html",
+            complete=function(response, status, request){
+              $('#loadingOverlay').css("visibility", "hidden");
+            }
+          );
+        }
+      });
+
+    });
 
     </script>
 </head>
@@ -128,27 +159,28 @@
     bottom: 0;
     position:fixed;
     z-index:9999;
-    background: rgba(255,255,255,0.7)
+    background: rgba(255,255,255,0.9)
 }
 
   #overlaySpinner{
     position: absolute;
-    top: 50%;
+    top: 30%;
     left: 50%;
-    width: 10rem;
-    height: 10rem;
+    margin-left: -2em;
+    width: 4em;
+    height: 4em;
   }
 </style>
 
 <body>
-<div id="loadingOverlay" class="text-center justify-content-center ">
+<div id="loadingOverlay" class="text-center justify-content-center">
   <div class="spinner-border" id="overlaySpinner" role="status">
-    <span class="sr-only">Loading...</span>
+    <span class="sr-only"></span>
   </div>
 </div>
 
 <nav class="navbar navbar-expand-md navbar-dark">
-  <a class="navbar-brand" href="index.html"><b>Nocturnal Flight Calls of North America</b></a>
+  <a class="navbar-brand" href="index.html" style="font-size: 1.5rem;"><b>Nocturnal Flight Calls of North America</b></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -170,50 +202,121 @@
   </div>
 </nav>
 
-<div id="maincontent">
-  <div>
-      <p>Welcome! This website acts as a quick reference to many of the nocturnal flight calls of birds of North America.</p>
+<div id="maincontent" class="container-fluid">
+  <div class="row mt-2 mr-2 ml-2">
+    <div class="column">
+      <p>Welcome! This website is a quick reference to the nocturnal flight calls of many North American birds.</p>
       <p>Calls displayed here were collected via remote acoustic recordings. As such, there is some degree of uncertainty in their identification. Read more about this process on the <a href="about.html">About</a> page.</p> 
-      <p></p>
-      <span id="toggleInfoLink" class="badge badge-primary mb-3" style="background-color: #626f7b; cursor: pointer;">How to use this website...</span>
+      <p><b>Note:</b> this website is best viewed on a computer. It may freeze on a mobile phone.</p>
+      <span id="infoToggler" onclick="toggleInfoLink()" class="badge progress-bar-success" style="cursor: pointer;">How to use this website...</span>
+    </div>
   </div>
 
-  <div id="toggleDiv">
-    <p>This website includes nocturnal flight calls of species captured in a <a href="about.html" target="_blank">long-term autonomous monitoring project</a> in Eastern Canada. By default, the website displays the common name, the scientific name, and a handful of example spectrograms for each species. Spectrograms are displayed with labels in milliseconds (horizontal axis) and kilohertz (vertical axis).</p>
-    
-    <p>Click a row to display additional spectrograms; click again to collapse the row. Click any spectrogram to listen to the sound.</p>
-    
-    <p>Use the <b>Filter species</b> functionality to limit which species are displayed:</p>
-      <ul>
-        <li> Filter by any information available in the columns (e.g. scientific name, alpha code, bioacoustic category)</li>
-        <li> Press Enter/Return between each keyword</li> 
-        <li> Click the "Filter" button (or use Tab + Enter) to apply the filters</li>
-        <li> Species that match any keyword will be displayed</li> 
-        <li> Click the "Clear filters" button to display the whole list</li>
-      </ul>
-    
-    <p>Use the <b>Display columns</b> selector to show or hide additional information.</p>
+  <div id="toggleDiv" class="row m-2">
+    <div class="column">
+      <p>By default, the website displays the common name, the scientific name, and a handful of example spectrograms for each species.</p> 
+      <p>About spectrograms:
+        <ul>
+          <li>Spectrograms are displayed with labels in milliseconds (horizontal axis) and kilohertz (vertical axis)</li>
+          <li>Click a row to display additional spectrograms. Click again to collapse the row</li>
+          <li>Click any spectrogram to listen to the sound. Click outside of the playback controls or hit "Esc" to exit the playback.</li>
+          <li>All recordings used to generate the spectrograms on this website are available for download by clicking on the spectrogram.</li>
+        </ul></p>
+    </div>
 
-    <p>All recordings used to generate the spectrograms on this website are available for download by clicking on the spectrogram.</p>
-
+    <div class="column">
+      <p>Use the <b>Display columns</b> selector to show or hide additional information about each species.</p>
+      <p>Use the <b>Filter species</b> functionality to limit which species are displayed:</p>
+        <ul>
+          <li> Filter by any information available in the columns. For example, try...
+            <ul>
+              <li>Bioacoustic categories, e.g. <code>zeep</code>, <code>double-banded upsweep</code></li>
+              <li>Taxonomic categories, e.g. <code>charadriiformes</code>, <code>setophaga</code></li>
+              <li>Four-letter alpha codes, e.g. <code>amro</code>, <code>oven</code></li>
+            </ul>
+          </li>
+          <li> Press Enter/Return between each keyword to add it to the search</li> 
+          <li> Click the "Filter" button (or use Tab + Enter) to apply the filters</li>
+          <li> Species that match any keyword will be displayed, e.g., searching for two alpha codes allows direct comparison of the species</li> 
+          <li> Click the "Clear" button to display the whole list</li>
+        </ul>
+    </div>
   </div>
 </div>
 
-<form class="form-block" style="padding-bottom:5px;">
-  <div class="form-row">
-    <label for="filterInput" class="col-lg-2 col-form-label">Filter species</label>
-    <div class="col">
-      <select multiple data-role="tagsinput" id="filterInput" name="filterInput" placeholder="Press Enter to add filter" ></select> 
+<div class="container-fluid mb-3 mt-3">
+  <!--Tagsinput form-->
+  <form>
+    <div class="row mb-3">
+      <div class="col col-12 col-lg-2">
+        <label for="filterInput" class="col-form-label">Filter species</label>
+      </div>
+
+        <div class="col col-7" style="padding-right:0px;">
+          <select multiple data-role="tagsinput" id="filterInput" name="filterInput" placeholder="Press Enter to add filter" ></select> 
+        </div>
+
+        <div class="col col-5 col-lg-3 btn-group flex-nowrap" style="padding-left:10px;">
+          <button type='button' class='btn btn-success' id="filterButton">Filter</button>
+          <button type='button' class='btn btn-primary' id="clearFiltersButton">Clear</button>
+        </div>
+    </div>
+  </form>
+
+  <!--Denoised spectrogram form-->
+  <!--<div class="col col-md-3">
+  <form style="padding-bottom: 3rem;">
+      <label for="toggleDenoised" class="form-check-label">Denoised spectrograms</label>
     </div>
 
-    <div class="col btn-group">
-      <button type='button' class='btn btn-success' id="filterButton">Filter</button>
-      <button type='button' class='btn btn-primary' id="clearFiltersButton">Clear filters</button>
+    <div class="col col-md-7">
+      <div class="form-check form-switch form-switch-md">
+        <input class="form-check-input" type="checkbox" role="switch" id="toggleDenoised" style="outline: none !important;">
+      </div>
     </div>
-  </div>
-</form>
+  </form>
+  -->
 
-<div id="includedTable"></div>
+
+  <!--Button group for columns-->
+  <!--Created by 3_create_spectrogam_display_table/create_spectrogram_display_table.ipynb-->
+  <form>
+    <div class="row">
+      <div class="col col-12 col-lg-2">
+        <label for="filterInput" class="col-form-label">Display columns</label>
+      </div>
+      <div class="col col-lg-10 btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-primary active" id="species_button">
+          <input type="checkbox" name="options" autocomplete="off" checked onchange="toggleHiddenColumn('species', 'species_button')"> Species
+        </label>
+        <label class="btn btn-primary" id="alpha_code_button">
+          <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('alpha_code', 'alpha_code_button')"> Code
+        </label>
+        <label class="btn btn-primary" id="order_button">
+          <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('order', 'order_button')"> Order
+        </label>
+        <label class="btn btn-primary" id="family_button">
+          <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('family', 'family_button')"> Family
+        </label>
+        <label class="btn btn-primary" id="bioacoustic_category_button">
+          <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('bioacoustic_category', 'bioacoustic_category_button')"> Category
+        </label>
+        <label class="btn btn-primary" id="oldbird_link_button">
+          <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('oldbird_link', 'oldbird_link_button')"> OldBird link
+        </label>
+        <label class="btn btn-primary" id="high_or_low_button">
+          <input type="checkbox" name="options" autocomplete="off" onchange="toggleHiddenColumn('high_or_low', 'high_or_low_button')"> Frequency
+        </label>
+        <label class="btn btn-primary active" id="spectrograms_button">
+          <input type="checkbox" name="options" autocomplete="off" checked onchange="toggleHiddenColumn('spectrograms', 'spectrograms_button')"> Spectrograms
+        </label>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+<div id="includedTable" class="container-fluid"></div>
 
 </body>
 </html>
