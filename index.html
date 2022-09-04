@@ -57,8 +57,8 @@
       // Lazy-load the audio and image
       thisAudio = parent.querySelector('audio');
       thisAudio.setAttribute('src', thisAudio.getAttribute('data-src'));
-      //thisImage = parent.querySelector('img');
-      //thisImage.setAttribute('src', thisImage.getAttribute('data-src'));
+      thisImage = parent.querySelector('img');
+      thisImage.setAttribute('src', thisImage.getAttribute('data-src'));
 
       parent.style.display = "block";
       thisAudio.play();
@@ -217,15 +217,13 @@
       <p>By default, the website displays the common name, the scientific name, and a handful of example spectrograms for each species.</p> 
       <p>About spectrograms:
         <ul>
-          <li>Spectrograms are displayed with labels in milliseconds (horizontal axis) and kilohertz (vertical axis)</li>
+          <li>Spectrograms are labeled in milliseconds (horizontal axis) and kilohertz (vertical axis)</li>
           <li>Click a row to display additional spectrograms. Click again to collapse the row</li>
-          <li>Click any spectrogram to listen to the sound. Click outside of the playback controls or hit "Esc" to exit the playback.</li>
-          <li>All recordings used to generate the spectrograms on this website are available for download by clicking on the spectrogram.</li>
+          <li>Click any spectrogram to listen to the sound. Click outside of the controls or hit "Esc" to exit playback</li>
         </ul></p>
     </div>
 
     <div class="column">
-      <p>Use the <b>Display columns</b> selector to show or hide additional information about each species.</p>
       <p>Use the <b>Filter species</b> functionality to limit which species are displayed:</p>
         <ul>
           <li> Filter by any information available in the columns. For example, try...
@@ -240,6 +238,8 @@
           <li> Species that match any keyword will be displayed, e.g., searching for two alpha codes allows direct comparison of the species</li> 
           <li> Click the "Clear" button to display the whole list</li>
         </ul>
+      <p>Select the <b>Denoised spectrograms</b> checkbox to show denoised versions of spectrograms.</p>
+      <p>Use the <b>Display columns</b> selector to show or hide additional information about each species.</p>
     </div>
   </div>
 </div>
@@ -253,7 +253,7 @@
       </div>
 
         <div class="col col-7" style="padding-right:0px;">
-          <select multiple data-role="tagsinput" id="filterInput" name="filterInput" placeholder="Press Enter to add filter" ></select> 
+          <select multiple data-role="tagsinput" id="filterInput" name="filterInput" placeholder='Press Enter to add filter' ></select> 
         </div>
 
         <div class="col col-5 col-lg-3 btn-group flex-nowrap" style="padding-left:10px;">
@@ -264,19 +264,18 @@
   </form>
 
   <!--Denoised spectrogram form-->
-  <!--<div class="col col-md-3">
-  <form style="padding-bottom: 3rem;">
-      <label for="toggleDenoised" class="form-check-label">Denoised spectrograms</label>
-    </div>
-
-    <div class="col col-md-7">
-      <div class="form-check form-switch form-switch-md">
-        <input class="form-check-input" type="checkbox" role="switch" id="toggleDenoised" style="outline: none !important;">
+  <form>
+    <div class="row mb-3">
+      <div class="col col-12 col-lg-2">
+        <label for="toggleDenoised" class="col-form-label">Denoised spectrograms</label>
+      </div>
+      <div class="col col-12 col-lg-10">
+        <div class="form-check form-switch form-switch-md">
+          <input class="form-check-input" type="checkbox" role="switch" id="toggleDenoised" style="outline: none !important; padding-left:0px;">
+        </div>
       </div>
     </div>
   </form>
-  -->
-
 
   <!--Button group for columns-->
   <!--Created by 3_create_spectrogam_display_table/create_spectrogram_display_table.ipynb-->
@@ -285,7 +284,7 @@
       <div class="col col-12 col-lg-2">
         <label for="filterInput" class="col-form-label">Display columns</label>
       </div>
-      <div class="col col-lg-10 btn-group btn-group-toggle" data-toggle="buttons">
+      <div class="col col-12 col-lg-10 btn-group btn-group-toggle" data-toggle="buttons">
         <label class="btn btn-primary active" id="species_button">
           <input type="checkbox" name="options" autocomplete="off" checked onchange="toggleHiddenColumn('species', 'species_button')"> Species
         </label>
