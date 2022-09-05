@@ -84,6 +84,7 @@
     };
 
     $(document).ready(function() {
+
       // Toggle the height of the spectrogram div in a species row when it is clicked
       // Because external table is loaded:
       // - Needs to be in document.ready
@@ -115,7 +116,7 @@
         $("#nfcTable").show()
       });
 
-      // Remove filter tags and show all columns when the "Clear filters" button is pressed
+      // Remove filter tags and show all rows when the "Clear filters" button is pressed
       // Needs to be in $(document).ready()
       $('#clearFiltersButton').click(function() {
         $("#nfcTable tr").show();
@@ -135,6 +136,7 @@
               "tables/spectrograms_denoised.html",
               complete=function(response, status, request){
                 $('#loadingOverlay').css("visibility", "hidden");
+                reapplySettings();
               }
             );
           }); 
@@ -143,11 +145,34 @@
             "tables/spectrograms.html",
             complete=function(response, status, request){
               $('#loadingOverlay').css("visibility", "hidden");
+                reapplySettings();
             }
           );
         }
       });
 
+      function reapplySettings(){
+        //Re-filter the table rows as needed
+        $('#filterButton').trigger( "click" ); 
+
+        //Display the desired columns
+        const checked_by_default = ["species", "spectrograms"];
+        const unchecked_by_default = ["alpha_code", "order", "family", "bioacoustic_category", "oldbird_link", "high_or_low"];
+
+        // If species or spectrogram is unchecked: toggle
+        checked_by_default.forEach(function (col, index) {
+          if (!$("#"+col+"_button").hasClass("active")){
+            toggleHiddenColumn(col, col+'_button');
+          }
+        });
+
+        // If the other columns are checked: apply toggle for them
+        unchecked_by_default.forEach(function (col, index) {
+          if ($("#"+col+"_button").hasClass("active")){
+            toggleHiddenColumn(col, col+'_button');
+          }
+        });
+      }
     });
 
     </script>
