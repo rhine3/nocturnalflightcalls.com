@@ -85,7 +85,7 @@
       // - Needs to be in document.ready
       // - Need to use delegated method (.on instead of .click) because external table is loaded
       $('#includedTable').on("click", ".species_row", function(e) {
-        if (!($(e.target).is('img') | $(e.target).hasClass('overlay'))) {
+        if ($(e.target).hasClass('species') && !$(e.target).is('img')) {
           $(this).find('.spectrogramContainer').css("height",
             ($(this).find('.spectrogramContainer').css("height") === "102px") ? "auto" : "102px"
           )
