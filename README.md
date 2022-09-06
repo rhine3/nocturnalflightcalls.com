@@ -1,4 +1,4 @@
-# nocturnalflightcalls.com
+# Nocturnal Bird Flight Calls of North America
 
 [![DOI](https://zenodo.org/badge/358788505.svg)](https://zenodo.org/badge/latestdoi/358788505)
 
