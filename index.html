@@ -199,11 +199,16 @@
     z-index:9999;
     background: rgba(255,255,255,0.9)
 }
+  #overlayInfoDiv{
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    margin-left: -10em;
+    width: 20em;
+    height: 20em;
+  }
 
   #overlaySpinner{
-    position: absolute;
-    top: 30%;
-    left: 50%;
     margin-left: -2em;
     width: 4em;
     height: 4em;
@@ -212,8 +217,12 @@
 
 <body>
 <div id="loadingOverlay" class="text-center justify-content-center">
-  <div class="spinner-border" id="overlaySpinner" role="status">
-    <span class="sr-only"></span>
+  <div id="overlayInfoDiv">
+    <div class="spinner-border" id="overlaySpinner" role="status">
+      <span class="sr-only"></span>
+    </div>
+    <h1>Loading...</h1>
+    <h5>Website best viewed on a computer. It may freeze or crash on a mobile device.</h5>
   </div>
 </div>
 
