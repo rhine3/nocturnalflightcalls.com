@@ -1,23 +1,45 @@
-cff-version: 0.1
-message: "If you use this software, please cite it as below."
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: Nocturnal Bird Flight Calls of North America
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
 authors:
-  - family-names: Rhinehart
-    given-names: Tessa A.
-    orcid: https://orcid.org/0000-0002-4352-3464
-  - family-names: Kearney
-    given-names: John
-  - family-names: Taylor
-    given-names: Phil
-  - family-names: Chronister
-    given-names: Lauren
-    orcid: https://orcid.org/0000-0003-3623-9462
-  - family-names: Freeland-Haynes
-    given-names: Louis
-    orcid: https://orcid.org/0000-0002-0753-1600
-  - family-names: Kitzes
-    given-names: Justin
-    orcid: https://orcid.org/0000-0001-7839-3594
-title: nocturnalflightcalls.com v0.1
-version: v0.1
-date-released: 2022-09-06
-            
+  - given-names: Tessa
+    family-names: Rhinehart
+    email: tessa.rhinehart@pitt.edu
+    affiliation: University of Pittsburgh
+    orcid: 'https://orcid.org/0000-0002-4352-3464'
+  - given-names: John
+    family-names: Kearney
+    email: j.f.kearney@gmail.com
+  - given-names: Phil
+    family-names: Taylor
+    email: tabanid@gmail.com
+    affiliation: Acadia University
+  - given-names: Lauren
+    family-names: Chronister
+    email: lauren.chronister@pitt.edu
+    affiliation: University of Pittsburgh
+    orcid: 'https://orcid.org/0000-0003-3623-9462'
+  - given-names: Louis
+    family-names: Freeland-Haynes
+    email: louis.freelandhaynes@pitt.edu
+    affiliation: University of Pittsburgh
+    orcid: 'https://orcid.org/0000-0002-0753-1600'
+  - given-names: Justin
+    family-names: Kitzes
+    email: justin.kitzes@pitt.edu
+    affiliation: University of Pittsburgh
+    orcid: 'https://orcid.org/0000-0001-7839-3594'
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.7054404
+  - type: url
+    value: 'https://nocturnalflightcalls.com'
+repository-code: 'https://github.com/rhine3/nocturnalflightcalls.com'
+version: '0.1'
+date-released: '2022-09-06'
