@@ -1,6 +1,8 @@
 # nocturnalflightcalls.com
 
-This repository supports nocturnalflightcalls.com, a reference for bird Nocturnal Flight Calls of North America.
+[![DOI](https://zenodo.org/badge/358788505.svg)](https://zenodo.org/badge/latestdoi/358788505)
+
+This repository supports https://nocturnalflightcalls.com, a reference for bird nocturnal flight calls of North America.
 
 ## Organization
 The main files for the webpage are listed in the following directories:
