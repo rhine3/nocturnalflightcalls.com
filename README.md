@@ -1,4 +1,4 @@
-# nfcs2
+# nocturnalflightcalls.com
 
 This repository supports nocturnalflightcalls.com, a reference for bird Nocturnal Flight Calls of North America.
 
